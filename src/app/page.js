@@ -22,6 +22,11 @@ import {
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { ChevronsDown, CircleHelp } from "lucide-react";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 export default function Home() {
   const [tetrisRank, setTetrisRank] = useState([]);
@@ -145,22 +150,23 @@ export default function Home() {
       <div className="w-full flex justify-center md:p-20">
         <Card className="w-full max-w-md bg-white  shadow-lg rounded-lg overflow-hidden">
           <CardHeader className="bg-gray-100  px-6 py-4 w-full flex flex-row justify-between items-center">
-            <CardTitle className="text-lg font-bold">Leaderboard</CardTitle>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <CircleHelp className="text-slate-500" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <Link href="https://tetris.wiki/Scoring#Original_Nintendo_scoring_system">
-                    <p>점수제도</p>
-                    <p class="text-blue-600 underline">
-                      Original Nintendo Scoring
-                    </p>
-                  </Link>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <CardTitle className="text-lg font-bold">
+              Leaderboard
+              <span className="text-slate-500 font-light text-sm">TETRIS</span>
+            </CardTitle>
+            <HoverCard>
+              <HoverCardTrigger>
+                <CircleHelp className="text-slate-500" />
+              </HoverCardTrigger>
+              <HoverCardContent>
+                <Link href="https://tetris.wiki/Scoring#Original_Nintendo_scoring_system">
+                  <p>점수제도</p>
+                  <p class="text-blue-600 underline">
+                    Original Nintendo Scoring
+                  </p>
+                </Link>
+              </HoverCardContent>
+            </HoverCard>
           </CardHeader>
           <CardContent className="md:px-6 md:py-4">
             <Table>
