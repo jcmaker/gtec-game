@@ -25,6 +25,7 @@ import {
 import { db } from "../../../../fbManager";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Board = () => {
   const router = useRouter();
@@ -74,10 +75,16 @@ const Board = () => {
   return (
     <div
       ref={eBoard}
-      className="inline-block m-5 p-5 border border-green-500 focus:outline-none"
+      className="inline-block m-5 p-5 border border-green-500 focus:outline-none "
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
+      <div className="md:hidden absolute w-screen h-screen bg-slate-50 flex flex-col justify-center items-center top-0 left-0 z-50">
+        모바일 화면 준비중!
+        <Link href="/">
+          <Button>돌아가기</Button>
+        </Link>
+      </div>
       <div>
         <span className="">점수:</span>
         <span className="">{score.toLocaleString()}</span>
