@@ -60,11 +60,20 @@ export function useBoard() {
 
   useEffect(updateDisplay, [scene, shape, position]);
   useEffect(removeFullLines, [scene, level]);
-  useInterval(tick, 600);
+  // useInterval(tick, 600);
+  useInterval(tick, calculateInterval(level));
 
   function updateDisplay() {
     const newDisplay = mergeIntoStage(scene, shape, position);
     setDisplay(newDisplay);
+  }
+  function calculateInterval(level) {
+    // 레벨 0과 1에서는 간격을 600ms로 유지하고, 레벨 2부터 감소 시작
+    if (level <= 1) {
+      return 600; // 레벨 0과 1에서는 기존의 속도를 유지
+    } else {
+      return Math.max(100, 600 - (level - 1) * 50); // 레벨 2부터 간격이 감소
+    }
   }
 
   function tick() {
