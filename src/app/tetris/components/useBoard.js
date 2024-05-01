@@ -197,12 +197,28 @@ export function useBoard() {
         event.preventDefault();
         break;
       case " ":
-        movePosition(0, 2);
+        // movePosition(0, 10);
+        hardDrop();
         event.preventDefault();
         break;
+      case "Shift":
+        hardDrop();
+        event.preventDefault();
+        break;
+
       default:
         break;
     }
+  }
+
+  function hardDrop() {
+    let dropDistance = 0;
+    while (
+      validPosition({ x: position.x, y: position.y + dropDistance + 1 }, shape)
+    ) {
+      dropDistance++;
+    }
+    movePosition(0, dropDistance);
   }
 
   function movePosition(x, y) {
