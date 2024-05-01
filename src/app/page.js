@@ -155,8 +155,8 @@ export default function Home() {
               Leaderboard
               <span className="text-slate-500 font-light text-sm">TETRIS</span>
             </CardTitle>
+            <ThemeToggle />
             <HoverCard>
-              <ThemeToggle />
               <HoverCardTrigger>
                 <CircleHelp className="text-slate-500 ml-5" />
               </HoverCardTrigger>
@@ -170,7 +170,7 @@ export default function Home() {
               </HoverCardContent>
             </HoverCard>
           </CardHeader>
-          <CardContent className="md:px-6 md:py-4">
+          <CardContent className="p-1 md:px-6 md:py-4">
             <Table>
               <TableHeader>
                 <TableRow>
