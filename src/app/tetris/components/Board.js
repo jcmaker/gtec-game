@@ -80,7 +80,7 @@ const Board = () => {
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      <div className="md:hidden absolute w-screen h-screen bg-slate-50 flex flex-col justify-center items-center top-0 left-0 z-50">
+      <div className="md:hidden absolute w-screen h-screen bg-slate-50 dark:bg-gray-700 flex flex-col justify-center items-center top-0 left-0 z-50">
         모바일 화면 준비중!
         <Link href="/">
           <Button>돌아가기</Button>
