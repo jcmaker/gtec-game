@@ -27,6 +27,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { ThemeToggle } from "@/components/ThemeToggler";
 
 export default function Home() {
   const [tetrisRank, setTetrisRank] = useState([]);
@@ -140,23 +141,24 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center w-screen h-screen overflow-hidden overflow-y-scroll">
-      <div className="w-screen h-[300px] flex justify-center items-center p-10 bg-[#fafafa]">
+      <div className="w-screen h-[300px] flex justify-center items-center p-10 bg-[#fafafa] dark:bg-gray-800">
         <Link href="/tetris">
           <Button className="w-[280px] h-[100px] bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 text-xl">
             Play Game
           </Button>
         </Link>
       </div>
-      <div className="w-full flex justify-center md:p-20">
-        <Card className="w-full max-w-md bg-white  shadow-lg rounded-lg overflow-hidden">
-          <CardHeader className="bg-gray-100  px-6 py-4 w-full flex flex-row justify-between items-center">
+      <div className="w-full flex justify-center md:p-20 dark:bg-gray-900">
+        <Card className="w-full max-w-lg bg-white dark:bg-gray-800  shadow-lg rounded-lg overflow-hidden">
+          <CardHeader className="bg-gray-100 dark:bg-gray-700  px-6 py-4 w-full flex flex-row justify-between items-center">
             <CardTitle className="text-lg font-bold">
               Leaderboard
               <span className="text-slate-500 font-light text-sm">TETRIS</span>
             </CardTitle>
             <HoverCard>
+              <ThemeToggle />
               <HoverCardTrigger>
-                <CircleHelp className="text-slate-500" />
+                <CircleHelp className="text-slate-500 ml-5" />
               </HoverCardTrigger>
               <HoverCardContent>
                 <Link href="https://tetris.wiki/Scoring#Original_Nintendo_scoring_system">
@@ -182,7 +184,11 @@ export default function Home() {
                 {tetrisRank.slice(0, loadRank).map((player, index) => (
                   <TableRow
                     key={player.id}
-                    className={index % 2 ? "bg-gray-100 w-full" : "w-full"}
+                    className={
+                      index % 2
+                        ? "bg-gray-100 dark:bg-gray-700 w-full"
+                        : "w-full"
+                    }
                   >
                     <TableCell>{index + 1 == 1 ? "👑" : index + 1}</TableCell>
                     <TableCell className="flex flex-col">

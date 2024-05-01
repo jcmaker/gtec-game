@@ -26,6 +26,7 @@ import { db } from "../../../../fbManager";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import toast, { Toaster } from "react-hot-toast";
 
 const Board = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ const Board = () => {
 
   const uploadToFirestore = async () => {
     if (!nickName || !department) {
-      console.log("Please fill all the fields");
+      toast.error("학과 또는 이름을 입력해주세요.");
       return;
     }
 
@@ -55,7 +56,7 @@ const Board = () => {
         lineCount,
         timestamp: serverTimestamp(),
       });
-      console.log("Document written with ID: ", docRef.id);
+      toast.success("점수 등록 완료");
       setNickName("");
       setDepartment("");
       router.push("/");
@@ -186,6 +187,7 @@ const Board = () => {
         </DialogContent>
       </Dialog>
       {isGameOver ? <span>Game Over</span> : ""}
+      <Toaster />
     </div>
   );
 };
@@ -211,7 +213,7 @@ const Cell = memo(({ cell }) => {
     baseStyle +
     (cell
       ? ` bg-[#0AA144] border border-slate-200 rounded`
-      : ` bg-slate-200 border-none`);
+      : ` bg-slate-200 dark:bg-slate-800 border-none`);
 
   return <span className={`${cellStyle}`}></span>;
 });
