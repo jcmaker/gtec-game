@@ -27,6 +27,13 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsDown,
+  RotateCcw,
+} from "lucide-react";
 
 const Board = () => {
   const router = useRouter();
@@ -34,6 +41,12 @@ const Board = () => {
   const eBoard = useRef();
   const [nickName, setNickName] = useState("");
   const [department, setDepartment] = useState();
+
+  const handleLeft = () => onKeyDown("ArrowLeft");
+  const handleRight = () => onKeyDown("ArrowRight");
+  const handleDown = () => onKeyDown("ArrowDown");
+  const handleRotate = () => onKeyDown("ArrowUp");
+  const handleDrop = () => onKeyDown(" ");
 
   useEffect(() => {
     if (eBoard.current) {
@@ -76,17 +89,17 @@ const Board = () => {
   return (
     <div
       ref={eBoard}
-      className="inline-block m-5 p-5 border border-green-500 focus:outline-none "
+      className="fixed top-0 md:inline-block md:p-5 md:border md:border-green-500 focus:outline-none "
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      <div className="md:hidden absolute w-screen h-screen bg-slate-50 dark:bg-gray-700 flex flex-col justify-center items-center top-0 left-0 z-50">
+      {/* <div className="md:hidden absolute w-screen h-screen bg-slate-50 dark:bg-gray-700 flex flex-col justify-center items-center top-0 left-0 z-50">
         모바일 화면 준비중!
         <Link href="/">
           <Button>돌아가기</Button>
         </Link>
-      </div>
-      <div>
+      </div> */}
+      <div className="flex justify-between items-center">
         <span className="">점수:</span>
         <span className="">{score.toLocaleString()}</span>
         <br />
@@ -96,9 +109,6 @@ const Board = () => {
         <span className="">클리어 라인:</span>
         <span className="">{lineCount.toLocaleString()}</span>
       </div>
-      {display.map((row, index) => (
-        <Row row={row} key={index} />
-      ))}
       <Dialog>
         <DialogTrigger as="button" disabled={!isGameOver}>
           <Button disabled={!isGameOver}>랭킹 등록</Button>
@@ -187,6 +197,27 @@ const Board = () => {
         </DialogContent>
       </Dialog>
       {isGameOver ? <span>Game Over</span> : ""}
+      {display.map((row, index) => (
+        <Row row={row} key={index} />
+      ))}
+
+      <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-gray-800 opacity-50 flex justify-between text-white">
+        <button onClick={handleRotate}>
+          <RotateCcw className="text-white" />
+        </button>
+        <button onClick={handleDrop}>
+          <ChevronsDown />
+        </button>
+        <button onClick={handleLeft}>
+          <ChevronLeft />
+        </button>
+        <button onClick={handleDown}>
+          <ChevronDown />
+        </button>
+        <button onClick={handleRight}>
+          <ChevronRight />
+        </button>
+      </div>
       <Toaster />
     </div>
   );

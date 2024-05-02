@@ -179,36 +179,39 @@ export function useBoard() {
   }
 
   function onKeyDown(event) {
-    switch (event.key) {
+    const key = event.key || event;
+    switch (key) {
       case "ArrowRight":
         movePosition(1, 0);
-        event.preventDefault();
+        // event.preventDefault();
         break;
       case "ArrowLeft":
         movePosition(-1, 0);
-        event.preventDefault();
+        // event.preventDefault();
         break;
       case "ArrowDown":
         movePosition(0, 1);
-        event.preventDefault();
+        // event.preventDefault();
         break;
       case "ArrowUp":
         rotateShape();
-        event.preventDefault();
+        // event.preventDefault();
         break;
       case " ":
-        // movePosition(0, 10);
         hardDrop();
-        event.preventDefault();
+        // event.preventDefault();
         break;
       case "Shift":
         hardDrop();
-        event.preventDefault();
+        // event.preventDefault();
         break;
 
       default:
         break;
     }
+    // if (typeof event.preventDefault === "function") {
+    //   event.preventDefault();
+    // }
   }
 
   function hardDrop() {
